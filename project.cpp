@@ -140,7 +140,8 @@ int getMIndex(vector last_matrix, matrix m) {
 } 
 
 /*
-
+Função responsável por obter todos os quadrados que é
+possível construir dentro da área a ladrilhar.
 */
 matrix getVerticesOfPossibleMatrixes() {
     matrix vertices_of_possible_matrices_aux = {};
@@ -173,7 +174,8 @@ matrix getVerticesOfPossibleMatrixes() {
 }
 
 /*
-
+Função responsável por verificar se dois quadrados
+podem ser colocados na mesma combinação.
 */
 bool matchesWith(vector m, vector a) {
     int size = m.size(), number_of_matches = 0, total_number = 0;
