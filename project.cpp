@@ -14,6 +14,7 @@ int columns = 0;
 int max_square_size = 0;
 int biggest_combination = 0;
 int configurations = 0;
+int number_of_combinations = 0;
 
 /*
 Função responsável por ler as entradas do input.
@@ -86,23 +87,12 @@ Pode-se pensar também que é o número máximo de matrizes 2x2 que se podem
 ter ao mesmo tempo a ladrilhar a área.
 */
 void getMaxNumberOfCombinations() {
-    int twobytwosquares_lines = 0, twobytwosquares_columns = 0;
-
-    if(lines > 1) {
-        if(lines % 2 == 0)
-            twobytwosquares_lines = lines / 2;
-        else
-            twobytwosquares_lines = (lines - 1)/2;
+    int size = index_column.size();
+    for(int i = 0; i < size; i+=2) {
+        if(index_column[i] >= 2) {
+            biggest_combination += index_column[i] / 2;
+        }
     }
-
-    if(columns > 1) {
-        if(columns % 2 == 0)
-            twobytwosquares_columns = columns / 2;
-        else
-            twobytwosquares_columns = (columns - 1)/2;
-    }
-
-    biggest_combination = twobytwosquares_columns * twobytwosquares_lines;
 }
 
 /*
@@ -166,7 +156,6 @@ matrix getVerticesOfPossibleMatrixes() {
             if(m_basic[topRightIndex[0]][topRightIndex[1]] != 1)
                 break;
             int verticalIterations = getNumberOfVerticalIterations(square_size);
-            std::cout << "verticalIterations: " << verticalIterations << std::endl;
             for(int j = 0; j < verticalIterations; j++) {
                 if(square_size <= index_column[lines - (square_size + j)]) {
                     vector vertices = {};
@@ -190,28 +179,24 @@ matrix getVerticesOfPossibleMatrixes() {
 /*
 
 */
-bool matchesWith(matrix m, vector a) {
-    int size = m.size();
-    int number_of_matches = 0, total_number = 0;
+bool matchesWith(vector m, vector a) {
+    int size = m.size(), number_of_matches = 0, total_number = 0;
     bool matches = false;
 
-    for(int i = 0; i < size; i++) {
-        int size1 = m[i].size();
-        for(int j = 0; j < size1; j += 4) {
-            total_number++;
-            if(a[0] < m[i][j +2])
-                matches = true;
-            if(a[2] > m[i][j])
-                matches = true;
-            if(a[1] > m[i][j + 3])
-                matches = true;
-            if(a[3] < m[i][j + 1])
-                matches = true;
-            if(matches)
-                number_of_matches++;
-            matches = false;
+    for(int j = 0; j < size; j += 4) {
+        total_number ++;
+        if(a[0] < m[j +2])
+            matches = true;
+        if(a[2] > m[j])
+            matches = true;
+        if(a[1] > m[j + 3])
+            matches = true;
+        if(a[3] < m[j + 1])
+            matches = true;
+        if(matches)
+            number_of_matches ++;
+        matches = false;
         }
-    }
 
     return total_number == number_of_matches;
 }
@@ -228,10 +213,8 @@ int calculateParticularCombination(vector m_particular, matrix m) {
         int size_of_new_matrix = m_aux.size();
         matrix m_aux2 = {};
         for(int z = 0; z < size_of_new_matrix; z++) {
-            matrix m_aux3 = {};
-            m_aux3.push_back(m_aux[z]);
             for(int w = getMIndex(m_aux[z], m) + 1; w < size; w++) {
-                if(matchesWith(m_aux3, m[w])) {
+                if(matchesWith(m_aux[z], m[w])) {
                     vector aux = {};
                     int size2 = m_aux[z].size();
                     for(int j = 0; j < size2; j++) {
@@ -254,25 +237,26 @@ int calculateParticularCombination(vector m_particular, matrix m) {
         }
     }
 
-    return number_of_combinations;
+    return number_of_combinations;    
 }
 
 /*
 Função responsável por obter o número total de combinações 
 de uma certa área a ladrilhar.
 */
-int calculateNumberOfCombinations(matrix m) {
-    int size = m.size(), number_of_combinations = 0;
+void calculateNumberOfCombinations(matrix m) {
+    int size = m.size();
 
-    for(int k = 0; k < size; k++){
-        number_of_combinations += calculateParticularCombination(m[k], m);
+    if(m.size() > 0) {    
+        for(int k = 0; k < size; k++){
+            number_of_combinations += calculateParticularCombination(m[k], m);
+        }
     }
-    
-    return number_of_combinations;
+
+    std:: cout << number_of_combinations + configurations << std::endl;
 }
 
 int main() {
-    int number_of_combinations = 0;
 
     readInput();
 
@@ -284,24 +268,7 @@ int main() {
 
     matrix vertices_of_possible_matrices = getVerticesOfPossibleMatrixes();
 
-    if(vertices_of_possible_matrices.size() > 0) {
-        number_of_combinations = calculateNumberOfCombinations(vertices_of_possible_matrices);
-    }
-    /* for(int i = 0; i < lines; i++) {
-        for (int j = 0; j < columns; j++) {
-            std::cout << vertices_of_possible_matrices[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-    std:: cout << number_of_combinations + configurations << std::endl;
-    for(int i = 0; i < lines; i++) {
-        for (int j = 0; j < columns; j++) {
-            std::cout << vertices_of_possible_matrices[i][j] << " ";
-        }
-        std::cout << std::endl;
-    } */
-    std:: cout << number_of_combinations + configurations << std::endl;
+    calculateNumberOfCombinations(vertices_of_possible_matrices);
     
-
     return 0;
 }
