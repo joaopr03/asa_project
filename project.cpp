@@ -124,7 +124,8 @@ int getNumberOfVerticalIterations(int square_size) {
 }
 
 /*
-
+Função que retorna o índice do último quadrado dado num vetor (last_matrix)
+na matrix que guarda os vértices dos quadrados possíveis.
 */
 int getMIndex(vector last_matrix, matrix m) {
     int size = m.size(), size1 = last_matrix.size();
@@ -200,7 +201,8 @@ bool matchesWith(vector m, vector a) {
 }
 
 /*
-
+Função que calcula todas as combinações possíveis de um vetor em particular, 
+selecionado na matriz que guarda os vértices dos quadrados possíveis.
 */
 int calculateParticularCombination(vector m_particular, matrix m) {
     int size = m.size(), number_of_combinations = 0;
