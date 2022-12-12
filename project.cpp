@@ -128,14 +128,10 @@ int getNumberOfVerticalIterations(int square_size) {
 */
 int getMIndex(vector last_matrix, matrix m) {
     int size = m.size(), size1 = last_matrix.size();
-    vector real_last_matrix = {};
-    real_last_matrix.push_back(last_matrix[size1 - 4]);
-    real_last_matrix.push_back(last_matrix[size1 - 3]);
-    real_last_matrix.push_back(last_matrix[size1 - 2]);
-    real_last_matrix.push_back(last_matrix[size1 - 1]);
 
     for(int i = 0; i < size; i++){
-        if(m[i] == real_last_matrix){
+        if(m[i][3] == last_matrix[size1 - 1] && m[i][2] == last_matrix[size1 - 2] && 
+            m[i][1] == last_matrix[size1 - 3] && m[i][0] == last_matrix[size1 - 4]) {
             return  i;
         }
     }
