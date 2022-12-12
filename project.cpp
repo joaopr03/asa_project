@@ -231,8 +231,8 @@ int calculateParticularCombination(vector m_particular, matrix m) {
         } else {
             break;
         }
-    }
-
+    } 
+ 
     return number_of_combinations;    
 }
 
