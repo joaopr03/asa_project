@@ -16,7 +16,11 @@ Data Limite de Entrega: 13 de dezembro de 2022 (18h00)</i> </h3>
   questão. Uma configuração apenas utliza ladrilhos com dimensão 1×1, sendo que as restantes
   três utilizam ladrilhos com dimensões 1×1 e 2×2.
 </p>
-
+<br>
+<div align="center">
+  <img      src="https://cdn.discordapp.com/attachments/1052333643231674451/1057451840930857010/D8RtLh6s9PKpAAAAABJRU5ErkJggg.png"  alt="Figura 1">
+</div>
+<br>
 <p align="left">
   <b> Objectivo </b> : Dadas as dimensões n e m, bem como a especificação do caminho em escada que
   delimita a área a ladrilhar, pretende-se determinar o <b> número de configurações distintas </b> de
@@ -50,7 +54,11 @@ coluna pela qual o caminho em escada passa na i-ésima linha.
   questão. Considere que, para o caso em que o caminho em escada é definido por <i>c</i> = 0, para
   <i>i</i> = 1,2,...,n, o número de configurações é 0.
 </p>
-
+<br>
+<div align="center">
+  <img src="https://cdn.discordapp.com/attachments/1052333643231674451/1057452763530940477/image.png" alt="Figura 2">
+</div>
+<br>
 <h2 align="left"> <b> Exemplos </b> </h2>
 <h3 align="left"> <b> Input </b> </h3>
 <p align="left"> 4 <br> 5 <br> 0 <br> 2 <br> 3 <br> 5 <br> </p>
